@@ -1,0 +1,49 @@
+********************BLOCK********************
+
+a/b/c/clientname:shobhit
+a/b/c/clienttech:python
+a/b/c/clientcurr:USD
+a/b/c/clientcurr:JPY
+a/b/c/clientname:Heena
+a/b/c/clienttech:ML
+
+********************BLOCK********************
+
+In database we have three columns pos1,pos2,pos3 in which clientname,clienttech and clientcurr will store.
+
+final output in database should be :
+
+col1		col2		col3
+shobhit		NULL		NULL
+shobhit         NULL            USD
+shobhit         NULL            JPY
+heena		NULL		NULL
+heena		ML		NULL
+
+
+solution:
+*********
+1) Write the content mentioned in BLOCK in a file ( after parsing XML )
+2) Attach address in every row with ('--') in the parse file ex:
+a/b/c/clientname--ADD011223:shobhit
+a/b/c/clienttech--ADD011223:python
+a/b/c/clientcurr--ADD011223:USD
+a/b/c/clientcurr--ADD011223:JPY
+a/b/c/clientname--ADD011224:Heena
+a/b/c/clienttech--ADD011224:ML
+
+3) Write a function which will read the above file and will create below dictionary:
+
+set 1:
+dict={'clientname--ADD011223':['shobhit'],'clientcurr--ADD011223':['USD','JPY'],'clienttech--ADD011223':['python']}
+
+set 2:
+dict={'clientname--ADD011224':['heena'],'clienttech--ADD011224':['ML']}
+
+only 1 dictionary will be created and the program will execute in loop to process both the above sets
+
+dynamically create inserts to insert the data in respective positions
+once insert is done execute update for the same set to update position 1 in database. 
+
+5) Call the func in the parsing script.
+
