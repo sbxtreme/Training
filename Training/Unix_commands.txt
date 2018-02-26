@@ -1,0 +1,170 @@
+Linux:
+>> what is Linux
+>> Opensource and Licenses
+>> Linux distributions
+>> Root in Linux
+
+>>Sudo means Super user do will have root access
+
+# Command to know commads ( called as man pages )
+
+man <name of the command>
+ex: man grep
+
+ 
+#add a user:
+sudo -s # to go in sudo mode i.e work as a admin aur root user
+useradd <username> -p <password>
+
+# to change password
+passwd <username>
+
+# to list all the users
+cut -d: -f1 /etc/passwd
+
+# to delete user 
+sudo -s 
+userdel <username>
+
+# color codings in linux system
+files will have different color codings
+directories will have different color codings
+directories with full access will have different color codings
+
+# files related commands:
+## to create a file :  touch <filename>
+## to give full access to file : chmod +x <filename>
+## to revoke access from file : chmod -x <filename>
+## to list all the files : ls -lrt
+## here
+-l(to list all files and directories)
+r( to show results based on restrictions) 
+>> ls -lr (full permission files first)
+t( to show results based on time ) 
+>> ls -lt ( latest files first )
+
+so best is ls -lrt which means list all files then show using restrictions
+and then sort by time. Latest will be shown at the bottom.
+
+# to see the contents of file without opening 
+cat <filename>
+
+# to know the number of lines in the file
+wc -l 
+similarly there are many options which can be used with wc . To know use wc --help
+
+# to write in a file without opening a file
+cat > <filename>
+write the contents and then cntrl+ d to save
+
+# to write more than 1 commands in a single line
+touch test.txt | chmod +x test.txt
+here 2 commands are executed in a single line
+
+# to delete a file
+rm <filename>
+rm -f
+
+# to create a directory
+mkdir <directoryname>
+
+# to remove a directory
+rmdir <directoryname>
+
+# to know the disk space on a server
+df -h
+df -avail
+
+
+# Use of dev/null
+
+dev is a location where device files are kept which are used for communicating to device hardware.
+dev/null is a kind of black hole of linux in which we can redirect o/p of any command and which can be 
+discarded.
+
+touch $file 2> /dev/null
+if [ $? != 0 ]; then
+    echo File creation failed ---- (A)
+    exit 1
+else
+
+In the above senario i want to check whether i am able to create a file using touch command
+and if i failed to create due to some permission issue , the command will throw an error "permission denied"
+but i don't want to throw this error, instead i'll check the return code using $? which will tell
+1 if any error occurs and thus i can display message written in line (a).
+
+Basically /dev/null is a location where we can dump any stdoutput.
+
+# view the content in a readonly mode
+
+view < filename>
+
+# to delete a directory if its empty
+rmdir <directory_name>
+
+# to delete a directory if its not empty
+rm -r <directory> # here r is recursive i.e it will delete the content of the directory and then it will delete 
+a directory.
+
+# to sort the files in ascending to decending order of there size
+ls -xl
+
+# file permissions in linux
+
+-rw-rw-rw- 1 sbxtreme sbxtreme    0 Feb 26 20:50 ab.txt
+
+drwxrwxrwx 0 sbxtreme sbxtreme 4096 Feb 26 20:57 test_dir
+
+The permisions are broken into 4 sections.
+first character = - (file) , d (directory) , l (link)
+rwx = read write execute permission for the owner of file
+rwx = read write execute permission for member of groups owning the file.
+rwx = read write execute permission for other users
+---------------------------------------------------
+total =  10 characters to decide file permission
+
+# to join the contents of 2 file and write in 3rd file
+cat c1.txt c2.txt > c3.txt
+
+# to append in the same file
+cat >> c1.txt
+ 
+# copy operations
+cp <sourcefile> <targetpath>
+cp -i <sourcefile> <targetpath> # here -i asks user before copy (options-Y or N)
+cp -r <sourcedir> <targetdir> # here -r copies complete sourcedir with its contents to targetdir
+
+# create duplicate file
+cp <file1> <file2>
+
+# to remove files and directories both
+rm -rf *
+
+# to rename a file 
+mv <oldname> <newname>
+
+# to move files from 1 path to another
+mv filename /path/path1
+
+# to create alias 
+alias cls=clear
+
+# to display big file in pages
+pg filename
+or 
+more filename
+
+# to split a bigger file into small files
+split <filename> # this will split big file into equal lines small file
+split -100 filename.txt # this will break filename.txt data into files with 100 lines each
+split -100 filename.txt new_split_file # this is split data into files using naming conv. new_split_file 
+
+# to sort the file
+sort filename.txt
+
+# to find common data between 2 file
+comm -12 file1 file2 # both the files should be sorted.
+
+# to find difference between both the files and write in 3rd file.
+diff file1 file2 > file3
+
