@@ -1,0 +1,32 @@
+# python code
+import os
+import cx_Oracle
+data = open('purge_files.txt', 'r')
+rows=[]
+
+for i in data:
+	field=i.split(',')
+	field[-1] = field[-1].strip()
+	rows.append(tuple(field))
+data.close()
+
+# creating database connection and inserting entries related to files which needs to be  archieved.
+connection= cx_Oracle.connect("sbxtreme", "sbxtreme","localhost/xe")
+cursor = connection.cursor()
+cursor.bindarraysize = 100
+cursor.setinputsizes(100, 200, 200)
+# file name should be primary key.
+cursor.executemany("insert into purge_files(file_name, move_from, move_to) values (:1, :2, :3)", rows)
+connection.commit()
+cursor.close()
+
+
+# put the above code in ksh and pass database connections
+
+if parameter to unix is MAKE_AN_ENTRY then execute python script to connect to db and insert data in a table
+if parameter to unix is MOVE_FILES then purge/archieve files after reading the file names , from_path and to_path.
+
+create a file named purge_files.txt and make entry as below:
+************************************************************
+inv1_calc*,eagle/data/uploader,eagle/data/uploader/archieve
+fiode_clr_*,projects/uat/gfd/ETGFU_PRJ/tgtfiles,projects/uat/gfd/ETGFU_PRJ/archieve
