@@ -10,7 +10,6 @@ Linux:
 
 man <name of the command>
 ex: man grep
-
  
 #add a user:
 sudo -s # to go in sudo mode i.e work as a admin aur root user
@@ -167,4 +166,135 @@ comm -12 file1 file2 # both the files should be sorted.
 
 # to find difference between both the files and write in 3rd file.
 diff file1 file2 > file3
+
+# Use of pipes
+	# command to count num of files in a directory
+	ls -l | wc -l
+
+	# command to get the latest file in a directory
+	ls -ltr | tail -1
+
+	# command to get the oldest file in a directory
+	ls -ltr | head -2
+
+	# to display the n lines of all the files strating with a pattern
+	head -2 file_1* # this will display the first 2 lines of all the files starting with file_1
+
+# cut commands
+	# cut the content of files from 1 position to another
+	cut -c 1-8 filename 
+
+	# to get the name of the latest file whose size remains same
+	ls -ltr | tail -1 | cut -d ' ' -f 10
+
+	# to get the permission of the latest file generated
+	ls -ltr | tail -1 | cut -d ' ' -f 1 # here -d is for delimiter  and -f is for fields seperated by delimiter
+
+		# use case --> i have the below files 
+		-rw-rw-rw- 1 sbxtreme sbxtreme  62 Mar  6 17:27 sys1.txt
+		-rw-rw-rw- 1 sbxtreme sbxtreme  62 Mar  6 17:30 sys2.txt
+		and in each file i have values like 
+		10|11|'system'|'load'|'gross'
+		12|100|'system2'|'loadx'|'gess'
+
+		i need to get the latest file and need to cut the content of that file from field 3 to 5.
+
+		ls -ltr sys* | tail -1 | cat `cut -d ' ' -f 10` | cut -d '|' -f 3-5
+		output:
+
+		'system'|'load'|'gross'
+		'system2'|'loadx'|'gess'
+
+# sorting includes sorting of numbers first , then lower case and then upper case
+# sorting of file contents:	
+sort -n file.txt # sort using asending order
+sort -rn file.txt # sort using decending order
+
+# remove duplicate lines from the file
+sort -u filename.txt # remove duplicate lines
+sort -nu filename.txt # sorted and unique list
+
+# to remove duplicates using uniq command
+# it works always with sorted list
+uniq filename.txt
+
+# display the nth line of a file:
+sed '<nth-line>q;d' file.txt 
+sed '4q;d' filename.txt # this will display 4th line of a file
+
+# head command
+head -1 filename.txt # this will display the 1st line of file
+head -3 filename.txt # this will display the first 3 lines of file
+
+# tail command
+tail -1 filename.txt # this will display the last line of file
+tail -5 filename.txt # this will display the last 5 lines of file
+
+# grep commands :
+	# to find a word in a file or list of files 
+	grep -w hello file* # it will search hello word in all the files following the pattern file*	
+	# to find the letters in a file or list of files
+	grep cont file*
+	# to ignore the uppercase and lowercase while searching 
+	grep -i HeLLO file*
+	# to get the search result with line numbers
+	grep -ni HEllo file* # it will ignore upper/lower case and will search and give result with line numbers
+	# to get the number of occurance of a word
+	grep -ci Hello file*
+
+# find command:
+ find . -iname file_1.txt -type f  # to find a file under same directory
+ find . -iname unix -type d  # to find a directory under same directory
+ find ./ -iname "File*" -type f # to find a file in existing directory ignore case (upper/lower)
+
+# process in unix:
+
+	# command to list running process
+	ps -ef
+ 	# to check the space
+ 	df -h
+ 	# to kill a process
+ 	kill -9 <psid>
+
+
+# bash scripting points:
+
+command to check all the available shell for you system
+cat /etc/shells
+
+Shell is an interpreter which converts unix commands into machine language for executing the commands.
+There are different types of shells present which are:
+1) borne shell ( sh )
+2) borne again shell ( bash )
+3) korn shell ( ksh )
+
+while writing shell script the first line tells the interpreter that which shell the script is using.
+#! /bin/bash  # here this means shebang or hashbang then location of shell i.e bash shell
+
+Variables in linux:
+-- system variables : always capital
+-- user_defined_variable : convention is to write in lowercase
+
+#read command (to read the i/p from the user while script execution we use read)
+read name 
+the username is $name
+
+# the below ways are used for reading username password and array of names from user
+read -p " enter the name" name
+read -sp " enter the pasw" pasw
+echo 
+echo "enter all the names"
+read -a names
+echo " the name is $name"
+echo " the pasw is $pasw"
+echo " the names are ${names[0]} ${names[1]}"
+
+# to clear history of commands
+history -c
+
+
+
+
+
+
 
