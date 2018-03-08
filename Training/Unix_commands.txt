@@ -41,6 +41,10 @@ r( to show results based on restrictions)
 >> ls -lr (full permission files first)
 t( to show results based on time ) 
 >> ls -lt ( latest files first )
+>> ls -R # to show all the files inside all the directories present on a location where we executed this command
+
+to view the hidden files
+ls -al ( .profile is a hidden file which holds configurations)
 
 so best is ls -lrt which means list all files then show using restrictions
 and then sort by time. Latest will be shown at the bottom.
@@ -63,6 +67,9 @@ here 2 commands are executed in a single line
 # to delete a file
 rm <filename>
 rm -f
+
+# to delete a file with conformation
+rm -i <filename>
 
 # to create a directory
 mkdir <directoryname>
@@ -144,6 +151,9 @@ mv <oldname> <newname>
 
 # to move files from 1 path to another
 mv filename /path/path1
+
+# to move a file from home (a583853) to user (eagle) directory.
+sudo mv file1 /path/path1
 
 # to create alias 
 alias cls=clear
