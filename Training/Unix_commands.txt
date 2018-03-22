@@ -266,6 +266,12 @@ tail -5 filename.txt # this will display the last 5 lines of file
  	# to kill a process
  	kill -9 <psid>
 
+here -9 is a signal which is sent to a program to terminate the process
+the list of all the signals which can be fired to a program can be listed using the below command
+
+kill -l
+
+
 
 # bash scripting points:
 
@@ -302,9 +308,8 @@ echo " the names are ${names[0]} ${names[1]}"
 # to clear history of commands
 history -c
 
+# find the file or a directory which is older than 10 days. 
+find -name 'sho*' -mtime +10
 
-
-
-
-
-
+# to remove a file or a directory which is older than 20 days.
+find -name "sho*" -mtime +20 -exec rm -rf {} \;
