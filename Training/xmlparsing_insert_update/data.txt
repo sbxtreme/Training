@@ -1,6 +1,0 @@
-clientname--ADD011223:shobhit
-clienttech--ADD011223:python
-clientcurr--ADD011223:USD
-clientcurr--ADD011223:JPY
-clientname--ADD011224:Heena
-clienttech--ADD011224:ML
